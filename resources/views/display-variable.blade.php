@@ -16,7 +16,7 @@
             Class Variable
         </div>
         <div class="card-body">
-            <form class="row" method="post" action="{{url('searchMethodByClass')}}">
+            <form class="row" method="post" action="{{url('searchVariableByClass')}}">
                 @csrf
                 <div class="col-auto">
                     <input type="search" class=" form-control" placeholder="Search Variable By Class" name="className">

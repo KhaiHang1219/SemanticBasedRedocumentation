@@ -24,16 +24,32 @@ class MethodsController extends Controller
         }
     }
     public function search(Request $req){
-        $client = new Client();
-        $apiURL = 'http://127.0.0.1:5000/GetMethodByClass/'.''.$req->className;
-        try {
-            $response = $client->get($apiURL);
-            $jsonResponse = $response->getBody()->getContents();
-            $dataArray = json_decode($jsonResponse, true);
-            return view('display-method', ['Methods' => $dataArray]);
-        }catch(\Excrption $e){
-            return view('display-method', ['error' => $e->getMessage()]);
+        if($req->className){
+            $client = new Client();
+            $apiURL = 'http://127.0.0.1:5000/GetMethodByClass/'.''.$req->className;
+            try {
+                $response = $client->get($apiURL);
+                $jsonResponse = $response->getBody()->getContents();
+                $dataArray = json_decode($jsonResponse, true);
+                return view('display-method', ['Methods' => $dataArray]);
+            }catch(\Excrption $e){
+                return view('display-method', ['error' => $e->getMessage()]);
+            }
         }
+        else{
+            $client = new Client();
+            $apiURL = 'http://127.0.0.1:5000/GetAllMethod';
+
+            try {
+                $response = $client->get($apiURL);
+                $jsonResponse = $response->getBody()->getContents();
+                $dataArray = json_decode($jsonResponse, true);
+                return view('display-method', ['Methods' => $dataArray]);
+            } catch(\Excrption $e){
+                return view('display-method', ['error' => $e->getMessage()]);
+            }
+        }
+        
 
     }
     // public function index(){

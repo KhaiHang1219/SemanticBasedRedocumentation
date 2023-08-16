@@ -49,7 +49,9 @@ class FilesController extends Controller
         ]);
         $files = $request->file('fileuploads');
         foreach($files as $file){
-
+            if($file->getClientOriginalExtension() != "java"){
+                return redirect()->route('fileupload.index')->with('failed','Invalid File Extension');
+            }
             $fileUpload = new File;
             $fileUpload->filename = $file->getClientOriginalName();
             $path = Storage::disk('s3')->putFileAs('files/', $file, $fileUpload->filename);

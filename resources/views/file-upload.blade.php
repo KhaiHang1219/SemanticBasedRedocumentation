@@ -21,6 +21,11 @@
                     <b>{{ $message }}</b>
                 </div>
             @endif
+            @if($message = Session::get('failed'))
+                <div class="alert alert-danger">
+                    <b>{{ $message }}</b>
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

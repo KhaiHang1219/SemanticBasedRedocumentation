@@ -54,15 +54,15 @@ class FilesController extends Controller
             }
         } 
         
-        // foreach($files as $file){
-        //     $fileUpload = new File;
-        //     $fileUpload->filename = $file->getClientOriginalName();
-        //     $path = Storage::disk('s3')->putFileAs('files/', $file, $fileUpload->filename);
-        //     // $path = $file->store('public/uploads');
-        //     $fileUpload->filepath = Storage::disk('s3')->url($path);
-        //     $fileUpload->type= $file->getClientOriginalExtension();
-        //     $fileUpload->save();
-        // }
+        foreach($files as $file){
+            $fileUpload = new File;
+            $fileUpload->filename = $file->getClientOriginalName();
+            $path = Storage::disk('s3')->putFileAs('files/', $file, $fileUpload->filename);
+            // $path = $file->store('public/uploads');
+            $fileUpload->filepath = Storage::disk('s3')->url($path);
+            $fileUpload->type= $file->getClientOriginalExtension();
+            $fileUpload->save();
+        }
  
         return redirect()->route('fileupload.index')->with('success','Files uploaded successfully!'); 
 

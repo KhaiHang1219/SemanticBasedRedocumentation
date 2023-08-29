@@ -132,5 +132,41 @@ class FlaskAPITest extends TestCase
             $this->assertEquals("Has Attribute",$data['Relationship']);
         }
     }
+
+    public function test_DownloadDependenciesOntologyFileApi(){
+        $client = new Client();
+        $apiURL = 'http://127.0.0.1:5000/DependenciesOntology';
+
+        $response =  $client->get($apiURL);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('attachment; filename=Dependency.ttl', $response->getHeaderLine('Content-Disposition'));
+    }
+
+    public function test_DownloadMethodOntologyFileApi(){
+        $client = new Client();
+        $apiURL = 'http://127.0.0.1:5000/MethodOntology';
+
+        $response =  $client->get($apiURL);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('attachment; filename=Method.ttl', $response->getHeaderLine('Content-Disposition'));
+    }
+
+    public function test_DownloadVariableOntologyFileApi(){
+        $client = new Client();
+        $apiURL = 'http://127.0.0.1:5000/VariableOntology';
+
+        $response =  $client->get($apiURL);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('attachment; filename=Variable.ttl', $response->getHeaderLine('Content-Disposition'));
+    }
+
+    public function test_DownloadCompleteOntologyFileApi(){
+        $client = new Client();
+        $apiURL = 'http://127.0.0.1:5000/CompleteOntology';
+
+        $response =  $client->get($apiURL);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('attachment; filename=CompleteOntology.ttl', $response->getHeaderLine('Content-Disposition'));
+    }
     
 }
